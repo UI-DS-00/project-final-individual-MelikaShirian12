@@ -66,9 +66,11 @@ public class LoggedInUserFeatures {
             MyHeap heap = new MyHeap();
 
             for (User user : Graph.getLinkedInUsers().getVertices()){
-                int weight = Graph.scoring(Main.loggedIn_user, user  , 0 , scoring.getLevelScore(),scoring.getSpecialitiesScore(),
-                        scoring.getFiledScore(),scoring.getUniScore(),scoring.getWorkstationScore());
-                heap.insert(weight , user);
+                if (!Main.loggedIn_user.getConnectedPeople().contains(user.getIdNumber())) {
+                    int weight = Graph.scoring(Main.loggedIn_user, user, 0, scoring.getLevelScore(), scoring.getSpecialitiesScore(),
+                            scoring.getFiledScore(), scoring.getUniScore(), scoring.getWorkstationScore());
+                    heap.insert(weight, user);
+                }
             }
             return twentyRecommender(heap);
         }
