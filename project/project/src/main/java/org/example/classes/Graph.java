@@ -55,10 +55,10 @@ public class Graph {
         BFSTree.setRoot(startingPoint);
 
         //making a tree with at last six levels
-        int fiveRows = 5;
+        int fiveRows = 1;
         while (!level.isEmpty()){
 
-            if (fiveRows == 0)
+            if (fiveRows == 7)
                 break;
 
             List <User> nextLevel = new ArrayList<>();
@@ -69,17 +69,21 @@ public class Graph {
                     if (! known.contains(linked.getKey())){
                         known.add(linked.getKey());
                         // the more the level is higher ,  the more is the weight so we mines it from five
-                        int weight=BFSTree.addNode(user , linked.getKey() , 5-fiveRows , scoring);
+                        int weight = BFSTree.addNode(user, linked.getKey(), 7 - fiveRows, scoring);
+
+                        if (fiveRows != 1) {
+                            //finding the level of the user using bfs
+                            BfsHeap.insert(weight , linked.getKey());
+                        }
+
                         nextLevel.add(linked.getKey());
 
-                        //finding the level of the user using bfs
-                        BfsHeap.insert(weight , linked.getKey());
                     }
                 }
             level = nextLevel;
 
             //we are going to the next level
-            --fiveRows;
+            ++fiveRows;
         }
 
         return BFSTree;
