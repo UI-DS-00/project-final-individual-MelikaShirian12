@@ -109,14 +109,21 @@ public class Graph {
         try {
             if (parent.getSpecifiedInfo().getField().equals(child.getSpecifiedInfo().getField()))
                 weight += Math.pow(10, filedScore);
-            if (parent.getSpecifiedInfo().getUniversity().equals(child.getSpecifiedInfo().getUniversity()))
-                weight += Math.pow(10, uniScore);
-            if (child.getSpecifiedInfo().getWorkStation().equals(child.getSpecifiedInfo().getWorkStation()))
-                weight += Math.pow(10, workstationScore);
-
         } catch (NullPointerException e) {
             //for when we have a null argument
         }
+         try {
+             if (parent.getSpecifiedInfo().getUniversity().equals(child.getSpecifiedInfo().getUniversity()))
+                 weight += Math.pow(10, uniScore);
+         } catch (NullPointerException e) {
+             //for when we have a null argument
+         }
+         try {
+             if (child.getSpecifiedInfo().getWorkStation().equals(child.getSpecifiedInfo().getWorkStation()))
+                 weight += Math.pow(10, workstationScore);
+         } catch (NullPointerException e) {
+             //for when we have a null argument
+         }
 
         return weight;
     }
