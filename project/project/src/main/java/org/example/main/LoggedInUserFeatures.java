@@ -65,12 +65,12 @@ public class LoggedInUserFeatures {
 
             MyHeap heap = new MyHeap();
 
-            for (User user : Graph.getLinkedInUsers().getVertices()){
-                if (!Main.loggedIn_user.getConnectedPeople().contains(user.getIdNumber())) {
-                    int weight = Graph.scoring(Main.loggedIn_user, user, 0, scoring.getLevelScore(), scoring.getSpecialitiesScore(),
-                            scoring.getFiledScore(), scoring.getUniScore(), scoring.getWorkstationScore());
-                    heap.insert(weight, user);
-                }
+            for (User user : Graph.getLinkedInUsers().getVertices()) {
+                //if (!Main.loggedIn_user.getConnectedPeople().contains(user.getIdNumber())) {
+                int weight = Graph.scoring(Main.loggedIn_user, user, 0, scoring.getLevelScore(), scoring.getSpecialitiesScore(),
+                        scoring.getFiledScore(), scoring.getUniScore(), scoring.getWorkstationScore());
+                heap.insert(weight, user);
+                //}
             }
             return twentyRecommender(heap);
         }
@@ -90,7 +90,7 @@ public class LoggedInUserFeatures {
 
         User oppositeUser = Graph.getLinkedInUsers().findUser(id);
 
-        if (Main.loggedIn_user == null)
+        if (oppositeUser == null)
             throw new NotFoundException("there is no person with this id");
 
         if (!oppositeUser.getLinkedPeople().containsKey(Main.loggedIn_user)){
